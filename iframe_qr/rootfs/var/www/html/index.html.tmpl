@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Iframe QR Display</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #000; }
+  iframe { border: 0; width: 100%; height: 100%; }
+  .qr {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 1000;
+    isolation: isolate;
+    background: #fff;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+    line-height: 0;
+  }
+  .qr img { display: block; width: ${QR_SIZE}px; height: ${QR_SIZE}px; }
+
+  @property --hue-angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+  }
+
+  .party-frame { display: none; }
+  .party-frame.active {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    overflow: hidden;
+    --hue-angle: 0deg;
+    animation: party-spin 10s linear infinite;
+  }
+  .party-frame.active::before,
+  .party-frame.active::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(from var(--hue-angle) in hsl longer hue,
+      hsl(0deg 100% 55%), hsl(360deg 100% 55%));
+  }
+  /* dünner Rahmen */
+  .party-frame.active::before {
+    padding: 3px;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+  }
+  /* Leuchtkegel nach innen, Farbe pro Position wie am Rahmen dort */
+  .party-frame.active::after {
+    filter: blur(55px) saturate(1.6) brightness(1.2);
+    opacity: 1;
+    mix-blend-mode: screen;
+    -webkit-mask-image: radial-gradient(140% 140% at 50% 50%, transparent 18%, black 62%);
+            mask-image: radial-gradient(140% 140% at 50% 50%, transparent 18%, black 62%);
+  }
+  @keyframes party-spin {
+    to { --hue-angle: 360deg; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .party-frame.active { animation: none; }
+  }
+</style>
+</head>
+<body>
+<iframe src="${URL}"></iframe>
+<div class="qr">
+  <img src="https://api.qrserver.com/v1/create-qr-code/?size=${QR_SIZE}x${QR_SIZE}&data=${ENCODED_URL}" alt="QR-Code">
+</div>
+<div class="party-frame ${PARTY_CLASS}"></div>
+</body>
+</html>

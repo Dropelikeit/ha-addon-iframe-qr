@@ -1,0 +1,27 @@
+name: "Iframe QR Display"
+version: "1.0.0"
+slug: "iframe_qr"
+description: "Zeigt eine konfigurierbare Webseite als Vollbild-Iframe mit QR-Code-Overlay in der Ecke"
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+url: "https://github.com/marcelstrahl/ha-addon-iframe-qr"
+startup: application
+boot: auto
+init: false
+ingress: false
+ports:
+  8099/tcp: 8099
+ports_description:
+  8099/tcp: "Web-Oberfläche (Iframe + QR-Code)"
+options:
+  url: "https://viewora.marcel-strahl.de"
+  qr_size: 230
+  party_mode: false
+schema:
+  url: "url"
+  qr_size: "int(50,400)"
+  party_mode: "bool"
