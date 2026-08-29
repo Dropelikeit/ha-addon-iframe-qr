@@ -21,7 +21,9 @@ options:
   url: "https://google.com"
   qr_size: 230
   party_mode: false
+  party_glow_reach: 14
 schema:
   url: "url"
   qr_size: "int(50,400)"
   party_mode: "bool"
+  party_glow_reach: "int(4,120)"

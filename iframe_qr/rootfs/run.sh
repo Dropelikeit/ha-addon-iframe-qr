@@ -9,8 +9,9 @@ PARTY_CLASS=""
 if [ "$(jq -r '.party_mode' /data/options.json)" = "true" ]; then
   PARTY_CLASS="active"
 fi
+PARTY_GLOW_REACH=$(jq -r '.party_glow_reach' /data/options.json)
 
-export URL QR_SIZE ENCODED_URL PARTY_CLASS
-envsubst '${URL} ${QR_SIZE} ${ENCODED_URL} ${PARTY_CLASS}' < /var/www/html/index.html.tmpl > /var/www/html/index.html
+export URL QR_SIZE ENCODED_URL PARTY_CLASS PARTY_GLOW_REACH
+envsubst '${URL} ${QR_SIZE} ${ENCODED_URL} ${PARTY_CLASS} ${PARTY_GLOW_REACH}' < /var/www/html/index.html.tmpl > /var/www/html/index.html
 
 exec nginx -g "daemon off;"
