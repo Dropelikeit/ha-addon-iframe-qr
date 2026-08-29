@@ -54,11 +54,11 @@
   }
   /* Leuchtkegel nach innen, Farbe pro Position wie am Rahmen dort */
   .party-frame.active::after {
-    filter: blur(55px) saturate(1.6) brightness(1.2);
-    opacity: 1;
+    filter: blur(35px) saturate(1.3);
+    opacity: .9;
     mix-blend-mode: screen;
-    -webkit-mask-image: radial-gradient(140% 140% at 50% 50%, transparent 18%, black 62%);
-            mask-image: radial-gradient(140% 140% at 50% 50%, transparent 18%, black 62%);
+    -webkit-mask-image: radial-gradient(closest-side at 50% 50%, transparent 72%, black 96%);
+            mask-image: radial-gradient(closest-side at 50% 50%, transparent 72%, black 96%);
   }
   @keyframes party-spin {
     to { --hue-angle: 360deg; }

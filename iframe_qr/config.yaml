@@ -12,13 +12,13 @@ url: "https://github.com/marcelstrahl/ha-addon-iframe-qr"
 startup: application
 boot: auto
 init: false
-ingress: false
+ingress: true
 ports:
   8099/tcp: 8099
 ports_description:
   8099/tcp: "Web-Oberfläche (Iframe + QR-Code)"
 options:
-  url: "https://viewora.marcel-strahl.de"
+  url: "https://google.com"
   qr_size: 230
   party_mode: false
 schema:
